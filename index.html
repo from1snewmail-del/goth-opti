@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Оптимизация ПК для Fortnite: больше FPS, меньше задержка</title>
+<meta name="description" content="Настройка Windows, драйверов и игры под Fortnite: выше FPS, плавнее картинка, ниже задержка. Без читов и риска для аккаунта.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@600;800&family=Manrope:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#F3F1FF;--surface:#FFFFFF;--ink:#1A1446;--muted:#5B5589;--line:#D9D4F5;
+  --accent:#FFD21F;--accent-ink:#1A1446;--bad:#E5484D;--good:#2BA36B;--hero:#2A1F8F;--hero-ink:#FFFFFF;
+  color-scheme:light;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#120D3A;--surface:#1D1655;--ink:#F2F0FF;--muted:#A9A3DB;--line:#352C85;
+    --bad:#FF6B70;--good:#4BD08F;--hero:#1D1655;color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#120D3A;--surface:#1D1655;--ink:#F2F0FF;--muted:#A9A3DB;--line:#352C85;
+  --bad:#FF6B70;--good:#4BD08F;--hero:#1D1655;color-scheme:dark;
+}
+*{box-sizing:border-box;margin:0}
+:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+html{scroll-padding-top:env(safe-area-inset-top,0px);scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);font:400 17px/1.6 Manrope,system-ui,sans-serif}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
+.wrap{max-width:1040px;margin:0 auto;padding:0 20px}
+h1,h2,h3{font-family:Unbounded,Manrope,system-ui,sans-serif;line-height:1.15}
+h2{font-size:clamp(1.5rem,4vw,2.1rem);margin-bottom:12px}
+section{padding:64px 0}
+.lead{color:var(--muted);max-width:60ch}
+.btn{display:inline-block;background:var(--accent);color:var(--accent-ink);font-weight:700;padding:14px 24px;border-radius:12px;text-decoration:none;border:0;cursor:pointer;font-size:1rem;font-family:inherit}
+.btn:hover{filter:brightness(.95)}
+.btn.ghost{background:transparent;color:inherit;border:2px solid currentColor}
+
+/* hero */
+.hero{background:var(--hero);color:var(--hero-ink);padding:28px 0 72px}
+.nav{display:flex;justify-content:space-between;align-items:center;margin-bottom:56px;gap:12px}
+.logo{font-family:Unbounded,sans-serif;font-weight:800;font-size:1rem}
+.hero h1{font-size:clamp(2rem,6.4vw,3.6rem);font-weight:800;max-width:15ch;margin-bottom:20px}
+.hero p{color:#D6D1FF;max-width:52ch;margin-bottom:28px}
+.hero .row{display:flex;gap:12px;flex-wrap:wrap}
+.hero .btn.ghost{color:#fff}
+
+/* demo */
+.demo{background:var(--surface);border:2px solid var(--line);border-radius:20px;padding:24px;margin-top:-40px;position:relative}
+.tabs{display:inline-flex;border:2px solid var(--line);border-radius:12px;overflow:hidden;margin-bottom:20px}
+.tabs button{font:700 .95rem Manrope,sans-serif;padding:10px 20px;border:0;background:transparent;color:var(--muted);cursor:pointer}
+.tabs button[aria-pressed="true"]{background:var(--accent);color:var(--accent-ink)}
+.meter{margin-bottom:18px}
+.meter .top{display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin-bottom:6px}
+.meter b{font-family:Unbounded,sans-serif;font-size:1.7rem}
+.track{height:16px;background:var(--bg);border-radius:8px;overflow:hidden}
+.fill{height:100%;border-radius:8px;transition:width .6s ease,background-color .6s ease;width:0}
+.note{font-size:.85rem;color:var(--muted)}
+
+/* services */
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;margin-top:28px}
+.item{background:var(--surface);border:2px solid var(--line);border-radius:16px;padding:22px}
+.item h3{font-size:1.05rem;margin-bottom:8px}
+.item p{color:var(--muted);font-size:.97rem}
+.item:nth-child(1){border-radius:28px 8px 8px 8px}
+.item:nth-child(4){border-radius:8px 8px 28px 8px}
+
+/* steps */
+ol{list-style:none;padding:0;margin-top:28px;display:grid;gap:14px;counter-reset:s}
+ol li{counter-increment:s;display:grid;grid-template-columns:44px 1fr;gap:14px;align-items:start}
+ol li::before{content:counter(s);width:44px;height:44px;border-radius:50%;background:var(--accent);color:var(--accent-ink);display:grid;place-items:center;font:800 1rem Unbounded,sans-serif}
+ol strong{display:block}
+ol span{color:var(--muted)}
+
+/* faq */
+details{background:var(--surface);border:2px solid var(--line);border-radius:14px;padding:16px 20px;margin-top:12px}
+summary{font-weight:700;cursor:pointer}
+details p{color:var(--muted);margin-top:10px}
+
+/* cta */
+.cta{background:var(--hero);color:var(--hero-ink);text-align:center;padding:72px 0}
+.cta p{color:#D6D1FF;margin:0 auto 24px;max-width:48ch}
+footer{padding:24px 0;color:var(--muted);font-size:.85rem;text-align:center}
+@media (prefers-reduced-motion:reduce){.fill{transition:none}html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <nav class="nav" aria-label="Основная навигация">
+      <span class="logo">FPS Tune</span>
+      <a class="btn" href="https://t.me/uncrownedking666" target="_blank" rel="noopener">Написать в Telegram</a>
+    </nav>
+    <h1>Fortnite без лагов и просадок</h1>
+    <p>Настраиваю Windows, драйверы и саму игру под ваше железо: выше FPS, ровнее картинка, меньше задержка ввода. Без читов и без риска для аккаунта.</p>
+    <div class="row">
+      <a class="btn" href="https://t.me/uncrownedking666" target="_blank" rel="noopener">Заказать настройку</a>
+      <a class="btn ghost" href="#result">Что изменится</a>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+    <div class="demo" id="result" aria-live="polite">
+      <div class="tabs" role="group" aria-label="Сравнение">
+        <button type="button" data-mode="before" aria-pressed="true">До настройки</button>
+        <button type="button" data-mode="after" aria-pressed="false">После настройки</button>
+      </div>
+      <div class="meter">
+        <div class="top"><span>Средний FPS</span><b id="fpsVal">78</b></div>
+        <div class="track"><div class="fill" id="fpsBar"></div></div>
+      </div>
+      <div class="meter">
+        <div class="top"><span>Задержка ввода, мс</span><b id="latVal">38</b></div>
+        <div class="track"><div class="fill" id="latBar"></div></div>
+      </div>
+      <div class="meter">
+        <div class="top"><span>Просадки (1% low), FPS</span><b id="lowVal">41</b></div>
+        <div class="track"><div class="fill" id="lowBar"></div></div>
+      </div>
+      <p class="note">Цифры показаны для примера. Реальный прирост зависит от вашего ПК: перед работой я сниму замеры и покажу честную разницу.</p>
+    </div>
+  </div>
+
+  <section>
+    <div class="wrap">
+      <h2>Что входит в настройку</h2>
+      <p class="lead">Только безопасные изменения, которые можно откатить. Никаких сторонних «ускорителей» и сомнительных программ.</p>
+      <div class="grid">
+        <div class="item"><h3>Windows</h3><p>План электропитания, игровой режим, автозагрузка, фоновые процессы и службы, мешающие игре.</p></div>
+        <div class="item"><h3>Видеокарта и драйверы</h3><p>Чистая установка драйвера, настройки панели NVIDIA, AMD или Intel под низкую задержку.</p></div>
+        <div class="item"><h3>Настройки Fortnite</h3><p>Режим рендера, разрешение, масштаб 3D, тени и эффекты: баланс между FPS и видимостью противников.</p></div>
+        <div class="item"><h3>Сеть и периферия</h3><p>Проверка пинга и потерь пакетов, частота опроса мыши, режим монитора и герцовка.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section style="padding-top:0">
+    <div class="wrap">
+      <h2>Как проходит работа</h2>
+      <ol>
+        <li><div><strong>Пишете в Telegram</strong><span>Описываете ПК и что не нравится: низкий FPS, фризы или задержка.</span></div></li>
+        <li><div><strong>Замеры до</strong><span>Фиксируем текущие показатели, чтобы потом сравнить.</span></div></li>
+        <li><div><strong>Настройка</strong><span>Меняю параметры по списку выше, все изменения можно откатить.</span></div></li>
+        <li><div><strong>Замеры после</strong><span>Показываю разницу и объясняю, что именно сработало.</span></div></li>
+      </ol>
+    </div>
+  </section>
+
+  <section style="padding-top:0">
+    <div class="wrap">
+      <h2>Частые вопросы</h2>
+      <details><summary>Можно ли получить бан?</summary><p>Нет. Я не использую читы, инжекторы и модификацию файлов игры. Все изменения делаются настройками системы, драйверов и самой игры.</p></details>
+      <details><summary>Подойдёт ли слабый ПК?</summary><p>Прирост возможен почти всегда, но чудес не будет: если железо сильно устарело, я скажу об этом сразу и подскажу, что стоит улучшить.</p></details>
+      <details><summary>Сколько это стоит?</summary><p>Стоимость зависит от ПК и задач. Напишите в Telegram, и я назову цену до начала работы.</p></details>
+      <details><summary>Работа удалённая?</summary><p>Да, уточните детали в Telegram, и я расскажу, как всё проходит.</p></details>
+    </div>
+  </section>
+
+  <div class="cta">
+    <div class="wrap">
+      <h2>Готовы играть плавнее?</h2>
+      <p>Напишите модель процессора и видеокарты, и я скажу, чего ждать от настройки.</p>
+      <a class="btn" href="https://t.me/uncrownedking666" target="_blank" rel="noopener">@uncrownedking666 в Telegram</a>
+    </div>
+  </div>
+</main>
+
+<footer>Fortnite является товарным знаком Epic Games. Сайт и услуга не связаны с Epic Games.</footer>
+
+<script>
+(function(){
+  var data={
+    before:{fps:78,lat:38,low:41,fc:'var(--bad)',lc:'var(--bad)'},
+    after:{fps:144,lat:14,low:112,fc:'var(--good)',lc:'var(--good)'}
+  };
+  var els={
+    fv:document.getElementById('fpsVal'),lv:document.getElementById('latVal'),ov:document.getElementById('lowVal'),
+    fb:document.getElementById('fpsBar'),lb:document.getElementById('latBar'),ob:document.getElementById('lowBar')
+  };
+  function set(mode){
+    var d=data[mode];
+    els.fv.textContent=d.fps;els.lv.textContent=d.lat;els.ov.textContent=d.low;
+    els.fb.style.width=(d.fps/165*100)+'%';
+    els.ob.style.width=(d.low/165*100)+'%';
+    els.lb.style.width=(d.lat/50*100)+'%';
+    els.fb.style.backgroundColor=d.fc;els.ob.style.backgroundColor=d.fc;els.lb.style.backgroundColor=d.lc;
+    document.querySelectorAll('.tabs button').forEach(function(b){
+      b.setAttribute('aria-pressed',String(b.dataset.mode===mode));
+    });
+  }
+  document.querySelectorAll('.tabs button').forEach(function(b){
+    b.addEventListener('click',function(){set(b.dataset.mode)});
+  });
+  set('before');
+})();
+</script>
+</body>
+</html>
